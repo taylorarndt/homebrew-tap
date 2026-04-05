@@ -9,10 +9,11 @@ class PerspectiveCuts < Formula
 
   def install
     system "swift", "build", "-c", "release", "--disable-sandbox"
-    bin.install ".build/release/perspective-cuts"
 
-    # Install the resource bundle next to the binary so Bundle.module finds it
-    bin.install ".build/release/perspective-cuts_perspective-cuts.bundle"
+    # Find the actual build output (path varies by architecture)
+    release_dir = Dir.glob(".build/*-apple-macosx/release").first || ".build/release"
+    bin.install "#{release_dir}/perspective-cuts"
+    bin.install "#{release_dir}/perspective-cuts_perspective-cuts.bundle"
   end
 
   test do
