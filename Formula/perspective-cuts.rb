@@ -10,10 +10,10 @@ class PerspectiveCuts < Formula
   def install
     system "swift", "build", "-c", "release", "--disable-sandbox"
 
-    # Find the actual build output (path varies by architecture)
-    release_dir = Dir.glob(".build/*-apple-macosx/release").first || ".build/release"
-    bin.install "#{release_dir}/perspective-cuts"
-    bin.install "#{release_dir}/perspective-cuts_perspective-cuts.bundle"
+    # SPM on Apple Silicon puts output in .build/arm64-apple-macosx/release/
+    release_path = ".build/arm64-apple-macosx/release"
+    bin.install "#{release_path}/perspective-cuts"
+    bin.install "#{release_path}/perspective-cuts_perspective-cuts.bundle"
   end
 
   test do
