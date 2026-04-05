@@ -1,7 +1,7 @@
 class PerspectiveCuts < Formula
   desc "A text-based language for writing Apple Shortcuts"
   homepage "https://github.com/taylorarndt/perspective-cuts"
-  url "https://github.com/taylorarndt/perspective-cuts.git", tag: "v0.1.0"
+  url "https://github.com/taylorarndt/perspective-cuts.git", tag: "v0.1.1"
   license "MIT"
 
   depends_on xcode: ["15.0", :build]
