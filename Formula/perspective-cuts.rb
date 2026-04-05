@@ -11,10 +11,8 @@ class PerspectiveCuts < Formula
     system "swift", "build", "-c", "release", "--disable-sandbox"
     bin.install ".build/release/perspective-cuts"
 
-    # Install the actions registry
-    resource_path = prefix/"Resources"
-    resource_path.mkpath
-    resource_path.install "Sources/perspective-cuts/Resources/actions.json"
+    # Install the resource bundle next to the binary so Bundle.module finds it
+    bin.install ".build/release/perspective-cuts_perspective-cuts.bundle"
   end
 
   test do
