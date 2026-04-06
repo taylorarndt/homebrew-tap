@@ -1,7 +1,7 @@
 class PerspectiveCuts < Formula
   desc "A text-based language for writing Apple Shortcuts"
   homepage "https://github.com/taylorarndt/perspective-cuts"
-  url "https://github.com/taylorarndt/perspective-cuts.git", tag: "v0.1.1"
+  url "https://github.com/taylorarndt/perspective-cuts.git", tag: "v0.1.2"
   license "MIT"
 
   depends_on xcode: ["15.0", :build]
@@ -9,11 +9,12 @@ class PerspectiveCuts < Formula
 
   def install
     system "swift", "build", "-c", "release", "--disable-sandbox"
+    bin.install ".build/release/perspective-cuts"
 
-    # SPM on Apple Silicon puts output in .build/arm64-apple-macosx/release/
-    release_path = ".build/arm64-apple-macosx/release"
-    bin.install "#{release_path}/perspective-cuts"
-    bin.install "#{release_path}/perspective-cuts_perspective-cuts.bundle"
+    # Install actions registry where the binary expects it
+    resource_path = prefix/"Resources"
+    resource_path.mkpath
+    resource_path.install "Sources/perspective-cuts/Resources/actions.json"
   end
 
   test do
