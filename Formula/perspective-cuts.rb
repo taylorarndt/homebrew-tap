@@ -1,7 +1,7 @@
 class PerspectiveCuts < Formula
   desc "A text-based language for writing Apple Shortcuts"
   homepage "https://github.com/taylorarndt/perspective-cuts"
-  url "https://github.com/taylorarndt/perspective-cuts.git", tag: "v0.1.2"
+  url "https://github.com/taylorarndt/perspective-cuts.git", tag: "v0.2.0"
   license "MIT"
 
   depends_on xcode: ["15.0", :build]
@@ -11,14 +11,12 @@ class PerspectiveCuts < Formula
     system "swift", "build", "-c", "release", "--disable-sandbox"
     bin.install ".build/release/perspective-cuts"
 
-    # Install actions registry where the binary expects it
     resource_path = prefix/"Resources"
     resource_path.mkpath
     resource_path.install "Sources/perspective-cuts/Resources/actions.json"
   end
 
   test do
-    # Write a simple test file
     (testpath/"test.perspective").write <<~EOS
       import Shortcuts
       text(text: "hello") -> greeting
